@@ -1,28 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import axios from 'axios'
 
 class App extends Component {
+  state = {
+    projects: []
+  }
+
+  componentDidMount() {
+    axios
+      .get('/projects')
+      .then(res => this.setState({ projects: res.data }))
+      .catch(err => console.log(err))
+  }
+
   render() {
+    const { projects } = this.state
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+        {projects.map(({ id, name, description, completed }) => (
+          <div
+            key={id}
+            style={{
+              border: '1px dotted grey',
+              margin: '10px',
+              padding: '5px'
+            }}
           >
-            Learn React
-          </a>
-        </header>
+            <h3>{name}</h3>
+            <p>{description}</p>
+            <p>{completed ? `completed` : `not completed`}</p>
+          </div>
+        ))}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
