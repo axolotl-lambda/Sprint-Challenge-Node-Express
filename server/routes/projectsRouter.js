@@ -53,8 +53,7 @@ router.post('/', async (req, res) => {
       .json({ error: 'make sure you include name and description' })
   } else {
     try {
-      const newProjectId = await db.insert(req.body)
-      const newProject = await db.get(newProjectId)
+      const newProject = await db.insert(req.body)
       res.status(201).json(newProject)
     } catch (error) {
       res.status(500).json({

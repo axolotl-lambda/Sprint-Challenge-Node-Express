@@ -38,8 +38,7 @@ router.post('/', async (req, res) => {
     res.status(400).json({ error: 'missing data for action' })
   } else {
     try {
-      const newActionId = await db.insert(req.body)
-      const newAction = await db.get(newActionId)
+      const newAction = await db.insert(req.body)
       res.status(201).json(newAction)
     } catch (error) {
       res.status(500).json({
