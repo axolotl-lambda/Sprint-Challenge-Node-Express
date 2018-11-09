@@ -72,15 +72,10 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ error: 'no update information provided' })
   } else {
     try {
-      const count = await db.update(req.params.id, req.body)
-      if (count) {
-        const project = await db.get(req.params.id)
-        res.status(200).json(project)
-      } else {
-        res.status(400).json({ error: 'failed to update project in db' })
-      }
+      const updatedProject = await db.update(req.params.id, req.body)
+      res.status(200).json(updatedProject)
     } catch (error) {
-      res.status(500).json({ error: 'db error' })
+      res.status(500).json({ error: 'failed to update project in db' })
     }
   }
 })
