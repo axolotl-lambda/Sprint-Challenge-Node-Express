@@ -73,6 +73,7 @@ router.delete('/:id', async (req, res) => {
   } else {
     try {
       const count = await db.remove(req.params.id)
+      console.log(count)
       if (count) {
         res.status(200).json(action)
       } else {

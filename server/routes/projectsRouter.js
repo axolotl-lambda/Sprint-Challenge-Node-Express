@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.get('/:id/posts', async (req, res) => {
+router.get('/:id/actions', async (req, res) => {
   try {
     const actions = await db.getProjectActions(req.params.id)
     if (actions) {
